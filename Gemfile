@@ -17,6 +17,7 @@ gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 
 group :development do
   gem "listen", ">= 3.0.5", "< 3.2"
+  gem "rubocop", require: false
   gem "ruby-progressbar", require: false
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
