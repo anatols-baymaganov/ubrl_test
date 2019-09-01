@@ -4,7 +4,7 @@ module Api
   module V1
     class PostsController < ApplicationController
       def create
-        render json: JsonBuilder.response(Creators::Post.call(permitted_params))
+        render_json(Creators::Post, permitted_params)
       end
 
       private

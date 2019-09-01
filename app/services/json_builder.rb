@@ -5,8 +5,8 @@ class JsonBuilder < BaseService
   option :args
 
   class << self
-    def call(subject)
-      new(subject: subject).send(:call)
+    def call(service, args)
+      new(service: service, args: args).send(:call)
     end
     alias response call
   end
@@ -14,15 +14,17 @@ class JsonBuilder < BaseService
   private
 
   def call
-    case subject
-    when Dry::Validation::MessageSet then response_json(422, subject.to_h)
-    when Post then response_json(200, subject.as_json(except: :author_ip).merge(author_ip: subject.author_ip.to_s))
-    when Score then response_json(200, avg_score: subject.post.avg_score.round(1))
-    else response_json(200, subject.as_json)
+    subject = service.call(args)
+    return response_json(subject.to_h, 422) if subject.is_a?(Dry::Validation::MessageSet)
+
+    case service.name
+    when "Creators::Post" then response_json(subject.as_json.merge(author_ip: subject.author_ip.to_s))
+    when "Creators::Score" then response_json(avg_score: subject.post.reload.avg_score.round(1))
+    else response_json(subject.as_json)
     end
   end
 
-  def response_json(status, body = {})
-    body.merge(status: status)
+  def response_json(body, status = 200)
+    { json: body, status: status }
   end
 end
