@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 module Creators
-  class Score < Base
+  class Score < ValidatableService
     option :post_id
     option :value
 
     def self.contract
-      @contract ||= ScoreContract.new
+      @contract ||= ScoreCreateContract.new
     end
 
     private_class_method :contract

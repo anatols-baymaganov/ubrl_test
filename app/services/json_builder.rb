@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
-class JsonBuilder < Base
-  option :subject
+class JsonBuilder < BaseService
+  option :service
+  option :args
 
   class << self
     def call(subject)

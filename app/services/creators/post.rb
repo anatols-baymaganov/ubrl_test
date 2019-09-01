@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Creators
-  class Post < Base
+  class Post < ValidatableService
     option :user
     option :title
     option :text
@@ -9,14 +9,16 @@ module Creators
 
     class << self
       def call(args)
-        user = User.find_or_initialize_by(login: args.delete(:login))
-        super(args.merge(user: user))
+        res = UserInitializer.call(args)
+        return res unless res.is_a?(User)
+
+        super(args.merge(user: res))
       end
 
       private
 
       def contract
-        @contract ||= PostContract.new
+        @contract ||= PostCreateContract.new
       end
     end
 

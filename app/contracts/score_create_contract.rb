@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ScoreContract < Dry::Validation::Contract
+class ScoreCreateContract < Dry::Validation::Contract
   params do
     required(:post_id).filled(:integer)
     required(:value).filled(:integer, gteq?: 1, lteq?: 5)

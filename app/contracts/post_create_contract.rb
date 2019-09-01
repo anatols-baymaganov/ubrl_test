@@ -2,7 +2,7 @@
 
 require "resolv"
 
-class PostContract < Dry::Validation::Contract
+class PostCreateContract < Dry::Validation::Contract
   params do
     required(:user).filled
     required(:title).filled(:string)
