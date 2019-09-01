@@ -7,6 +7,9 @@ Rails.application.routes.draw do
         get :top, on: :collection
       end
       resources :scores, only: :create
+      resources :users, only: [] do
+        get :author_ips, on: :collection
+      end
     end
   end
 end
