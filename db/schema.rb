@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -12,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_190_831_172_707) do
+ActiveRecord::Schema.define(version: 2019_09_01_145847) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,7 +20,9 @@ ActiveRecord::Schema.define(version: 20_190_831_172_707) do
     t.string "title", null: false
     t.text "text", null: false
     t.inet "author_ip", null: false
+    t.float "avg_score"
     t.index ["author_ip"], name: "index_posts_on_author_ip"
+    t.index ["avg_score"], name: "index_posts_on_avg_score"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 

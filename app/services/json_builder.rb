@@ -16,6 +16,7 @@ class JsonBuilder < Base
     case subject
     when Dry::Validation::MessageSet then response_json(422, subject.to_h)
     when Post then response_json(200, subject.as_json(except: :author_ip).merge(author_ip: subject.author_ip.to_s))
+    when Score then response_json(200, avg_score: subject.post.avg_score.round(1))
     else response_json(200, subject.as_json)
     end
   end
