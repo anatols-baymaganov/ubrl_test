@@ -7,6 +7,10 @@ module Api
         render_json(Creators::Post, permitted_params)
       end
 
+      def top
+        render_json(Queries::TopPosts, count: params[:count])
+      end
+
       private
 
       def permitted_params

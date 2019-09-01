@@ -20,6 +20,7 @@ class JsonBuilder < BaseService
     case service.name
     when "Creators::Post" then response_json(subject.as_json.merge(author_ip: subject.author_ip.to_s))
     when "Creators::Score" then response_json(avg_score: subject.post.reload.avg_score.round(1))
+    when "Queries::TopPosts" then response_json(subject.map { |post| post.slice(:title, :text) })
     else response_json(subject.as_json)
     end
   end
