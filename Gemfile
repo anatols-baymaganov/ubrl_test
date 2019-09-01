@@ -17,10 +17,12 @@ gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 
 group :development do
   gem "listen", ">= 3.0.5", "< 3.2"
+  gem "ruby-progressbar", require: false
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
 end
 
 group :development, :test do
   gem "byebug", platforms: %i[mri mingw x64_mingw]
+  gem "faker", require: false
 end
