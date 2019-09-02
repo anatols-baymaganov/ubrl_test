@@ -6,7 +6,7 @@ class PostCreateContract < Dry::Validation::Contract
   params do
     required(:user).filled
     required(:title).filled(:string)
-    required(:text).value(:string)
+    required(:text).filled(:string)
     required(:author_ip).filled(:string)
   end
 
