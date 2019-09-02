@@ -14,6 +14,8 @@ class JsonBuilder < BaseService
   private
 
   def call
+    return response_json({}, 422) unless service.respond_to?(:call)
+
     subject = service.call(args)
     return response_json(subject.to_h, 422) if subject.is_a?(Dry::Validation::MessageSet)
 
@@ -22,7 +24,6 @@ class JsonBuilder < BaseService
     when "Creators::Score" then response_json(avg_score: subject.post.reload.avg_score.round(1))
     when "Queries::TopPosts" then response_json(subject.map { |post| post.slice(:title, :text) })
     when "Queries::AuthorIps" then response_json(subject)
-    else response_json(subject.as_json)
     end
   end
 
