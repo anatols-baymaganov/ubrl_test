@@ -9,7 +9,7 @@ gem "bootsnap", ">= 1.4.2", require: false
 gem "dry-initializer"
 gem "dry-validation"
 gem "pg", ">= 0.18", "< 2.0"
-gem "puma", "~> 3.12"
+gem "puma", "~> 4.3"
 gem "rails", "~> 6.0.0"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
